@@ -1,0 +1,98 @@
+## Worked on during a community livestream!
+## Go watch it @ twitch.tv/trhrichard if it's still live!
+
+name: Lint & check commits
+
+run-name: Run checks on ${{ github.sha }}
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+jobs:
+  astro-check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9.15.4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22.12.0
+          cache: "pnpm"
+          cache-dependency-path: "./pnpm-lock.yaml"
+
+      - name: Caching
+        uses: actions/cache@v4
+        with:
+          path: |
+            .astro/
+            node_modules/
+          key: astro-check-cache
+          restore-keys: |
+            lint-check-cache
+            deploy-cache
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile # --frozen-lockfile because I want to have anything done reproducible on my side as much as possible
+
+      - name: Run Astro checks
+        run: pnpm astro check
+
+  prettier-check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9.15.4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22.12.0
+          cache: "pnpm"
+          cache-dependency-path: "./pnpm-lock.yaml"
+
+      - name: Caching
+        uses: actions/cache@v4
+        with:
+          path: |
+            .astro/
+            node_modules/
+          key: lint-check-cache
+          restore-keys: |
+            astro-check-cache
+            deploy-cache
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile # --frozen-lockfile because I want to have anything done reproducible on my side as much as possible
+
+      - name: Run Prettier checks
+        id: prettier-check
+        run: pnpm exec prettier --check .
+
+      - name: Correct linting on pushes # I haven't figured this out btw
+        id: prettier-write
+        if: ${{ steps.prettier-check.outcome == failure() }}
+        run: pnpm exec prettier --write .
+
+      - name: Push correct linting # I have no idea if it works btw
+        if: ${{ steps.prettier-write.outcome == success() && github.event_name == 'push' }}
+        run: |
+          git config user.name GitHub Actions CI
+          git config user.email actions@github.com
+          git add .
+          git commit -m "[skip ci] Auto-format with Prettier"
+          git push origin
