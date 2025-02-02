@@ -20,6 +20,12 @@ importers:
       astro:
         specifier: ^5.2.3
         version: 5.2.3(jiti@2.4.2)(lightningcss@1.29.1)(rollup@4.34.0)(typescript@5.5.4)(yaml@2.7.0)
+      lucide-astro:
+        specifier: ^0.473.0
+        version: 0.473.0(astro@5.2.3(jiti@2.4.2)(lightningcss@1.29.1)(rollup@4.34.0)(typescript@5.5.4)(yaml@2.7.0))
+      simple-icons-astro:
+        specifier: ^14.5.0
+        version: 14.5.0(astro@5.2.3(jiti@2.4.2)(lightningcss@1.29.1)(rollup@4.34.0)(typescript@5.5.4)(yaml@2.7.0))
       tailwindcss:
         specifier: ^4.0.2
         version: 4.0.2
@@ -1730,6 +1736,11 @@ packages:
   lru-cache@5.1.1:
     resolution: {integrity: sha512-KpNARQA3Iwv+jTA0utUVVbrh+Jlrr1Fv0e56GGzAFOXN7dk/FviaDW8LHmK52DlcH4WP2n6gI8vN1aesBFgo9w==}
 
+  lucide-astro@0.473.0:
+    resolution: {integrity: sha512-MM4P4rwF9Lypb49TQKa3tbuDZqwrL36wI2O5UTJIuH5H+ugSYx9FUxr6j3DqTwxDclHbwX/VBt5f9OXfAE/zRQ==}
+    peerDependencies:
+      astro: '>=2.7.1'
+
   magic-string@0.30.11:
     resolution: {integrity: sha512-+Wri9p0QHMy+545hKww7YAu5NyzF8iomPL/RQazugQ9+Ez4Ic3mERMd8ZTX5rfK944j+560ZJi8iAwgak1Ac7A==}
 
@@ -2198,6 +2209,11 @@ packages:
   signal-exit@4.1.0:
     resolution: {integrity: sha512-bzyZ1e88w9O1iNJbKnOlvYTrWPDl46O1bG0D3XInv+9tkPrxrN8jUUTiFlDkkmKWgn1M6CfIA13SuGqOa9Korw==}
     engines: {node: '>=14'}
+
+  simple-icons-astro@14.5.0:
+    resolution: {integrity: sha512-V2QEKp7GL4fU1oDsZMSw/H0pyqGisTiC7DAqDuxQZUqg13PYWo6Bz4KN9oLot4VfT+YWQPLeJ+7gWRnkdIKIlw==}
+    peerDependencies:
+      astro: '>=2.7.1'
 
   simple-swizzle@0.2.2:
     resolution: {integrity: sha512-JA//kQgZtbuY83m+xT+tXJkmJncGMTFT+C+g2h2R9uxkYIrE2yy9sgmcLhCnw57/WSD+Eh3J97FPEDFnbXnDUg==}
@@ -4648,6 +4664,10 @@ snapshots:
     dependencies:
       yallist: 3.1.1
 
+  lucide-astro@0.473.0(astro@5.2.3(jiti@2.4.2)(lightningcss@1.29.1)(rollup@4.34.0)(typescript@5.5.4)(yaml@2.7.0)):
+    dependencies:
+      astro: 5.2.3(jiti@2.4.2)(lightningcss@1.29.1)(rollup@4.34.0)(typescript@5.5.4)(yaml@2.7.0)
+
   magic-string@0.30.11:
     dependencies:
       '@jridgewell/sourcemap-codec': 1.5.0
@@ -5356,6 +5376,10 @@ snapshots:
       '@types/hast': 3.0.4
 
   signal-exit@4.1.0: {}
+
+  simple-icons-astro@14.5.0(astro@5.2.3(jiti@2.4.2)(lightningcss@1.29.1)(rollup@4.34.0)(typescript@5.5.4)(yaml@2.7.0)):
+    dependencies:
+      astro: 5.2.3(jiti@2.4.2)(lightningcss@1.29.1)(rollup@4.34.0)(typescript@5.5.4)(yaml@2.7.0)
 
   simple-swizzle@0.2.2:
     dependencies:
